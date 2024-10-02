@@ -1,5 +1,6 @@
 package com.melikeyalpi.siriusorange.service;
 
+import com.melikeyalpi.siriusorange.dto.ProductResponse;
 import com.melikeyalpi.siriusorange.model.Product;
 import com.melikeyalpi.siriusorange.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,5 +28,9 @@ public class ProductService {
 
     public List<Product> getAll() {
         return productRepository.findAll();
+    }
+
+    public Product getProduct(Long id) {
+        return productRepository.findById(id);
     }
 }

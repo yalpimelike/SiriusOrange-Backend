@@ -1,5 +1,7 @@
 package com.melikeyalpi.siriusorange.controller;
 
+import com.melikeyalpi.siriusorange.converter.ProductConverter;
+import com.melikeyalpi.siriusorange.dto.ProductResponse;
 import com.melikeyalpi.siriusorange.model.Product;
 import com.melikeyalpi.siriusorange.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -15,8 +17,13 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping
-    public List<Product> getProducts() {
-        return productService.getAll();
+    public List<ProductResponse> getProducts() {
+        return productService.getAll().stream().map(ProductConverter::toResponse).toList();
+    }
+
+    @GetMapping("/{id}")
+    public ProductResponse getProduct(@PathVariable Long id) {
+        return ProductConverter.toResponse(productService.getProduct(id));
     }
 
     @PostMapping
